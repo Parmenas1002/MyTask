@@ -13,6 +13,9 @@
                                     <p class="card-text text-justify"><%= task.description %> </p>
                                     <ul class="nav justify-content-end ">
                                         <li class="nav-item pr-3 ">
+                                            <%= link_to  'Details' , task_path(task.id), class: "card-menu-link"   %>
+                                        </li>
+                                        <li class="nav-item pr-3 ">
                                             <%= link_to  'Edit' , edit_task_path(task.id), class: "card-menu-link"  %>
                                         </li>
                                         <li><%= link_to  'Delete' , task_path(task.id), method: :delete , data: { confirm: 'Are you sure to delete this task'}, class: "card-menu-link" %></li>  

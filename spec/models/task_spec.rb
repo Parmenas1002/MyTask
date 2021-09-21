@@ -9,7 +9,7 @@ RSpec.describe Task, type: :model do
     
     it 'Validation is caught' do
       task = Task.new(title: "Title", description: "")
-      expect(task).to be_valid
+      expect(task).not_to be_valid
     end
     
     it 'Validation passes' do

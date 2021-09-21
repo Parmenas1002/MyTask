@@ -17,6 +17,7 @@ App Tables
 * state : int
 * doingDate : Date
 * priority : int
+* user_id : int
 
 ## Tag Table
 

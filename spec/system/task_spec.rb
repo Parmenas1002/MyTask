@@ -2,9 +2,6 @@ require 'rails_helper'
 RSpec.describe 'Task Test Management Function', type: :system do
     before do
     # Create task with factory
-        FactoryBot.create(:task)
-        FactoryBot.create(:second_task)
-       
     end
     describe 'Task Creation' do
         context 'When we are creating a task' do
@@ -29,6 +26,10 @@ RSpec.describe 'Task Test Management Function', type: :system do
     describe 'Task Details Page' do
         context 'When we are going to task details page ' do
         it 'The specified task is realy present' do
+            task = FactoryBot.create(:task, title: 'task')
+            visit tasks_path
+            click_on "Details"
+            expect(page).to have_content "task"
         end
         end
     end
