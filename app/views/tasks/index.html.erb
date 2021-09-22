@@ -6,9 +6,9 @@
             <% if @tasks.count > 0 %>
                 <div class="row justify-content-center align-content-center">
                     <% @tasks.each do |task| %>
-                        <div class= "col-md-4 align-items-stretch">
+                        <div class= "col-md-4 align-items-stretch" >
                             <div class="card bg-light mb-3" style="max-width: 100rem;">
-                                <div class="card-header font-weight-bold text-center"><%= task.title %></div>
+                                <div class="card-header font-weight-bold text-center task_row"><%=task.title%></div>
                                 <div class="card-body">
                                     <p class="card-text text-justify"><%= task.description %> </p>
                                     <ul class="nav justify-content-end ">
