@@ -1,0 +1,37 @@
+<div class= "container">
+    <div class= "row justify-content-center align-content-center">
+        <div class="col-md-7 ">
+            <div class="card shadow mb-5 p-4 bg-white border-0 index-card" >
+                <%= form_with(model: @task, local:true) do |form| %>
+                    
+                    <div class= "form-group">
+                        <label for="title" class= "text-left">Title</label>
+                        <%= form.text_field :title, class: "form-control", id: "title" %>
+                    </div>
+                    <div class= "form-group">
+                        <label for="description" >Description</label>
+                        <%= form.text_area :description, class: "form-control", id: "description ", rows: 5 %>
+                    </div>
+
+                    <% if @task.errors.any? %>
+                        <div class="alert alert-danger alert-dismissible fade show pt-2 pb-2 text-center">
+                            <% @task.errors.full_messages.each do |msg| %>
+                                <p><%= msg %></p>
+                            <% end %>
+                            
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    <% end %>
+                    <% if action_name == "new"%>
+                        <%= form.submit "Add Task", class: "btn btn-primary font-weight-bold text-uppercase text-center mt-3 pl-3 pr-3 pt-2 pb-2"%>
+                    <% else %>
+                        <%= form.submit "Edit Task", class: "btn btn-primary font-weight-bold text-uppercase text-center mt-3 pl-3 pr-3 pt-2 pb-2"%>
+                    <% end %>
+                    
+                <%end%>
+            </div>   
+        </div>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<h3 class= "mb-4 text-center mt-4"> Your Task List</h3>
+
+<div class="container-fluid mt-2">
+    <div class="row justify-content-center align-content-center pt-5">
+        <div class="col-md-8">
+            <% if @tasks.count > 0 %>
+                <div class="row justify-content-center align-content-center">
+                    <% @tasks.each do |task| %>
+                        <div class= "col-md-4 align-items-stretch">
+                            <div class="card bg-light mb-3" style="max-width: 100rem;">
+                                <div class="card-header font-weight-bold text-center"><%= task.title %></div>
+                                <div class="card-body">
+                                    <p class="card-text text-justify"><%= task.description %> </p>
+                                    <ul class="nav justify-content-end ">
+                                        <li class="nav-item pr-3 ">
+                                            <%= link_to  'Details' , task_path(task.id), class: "card-menu-link"   %>
+                                        </li>
+                                        <li class="nav-item pr-3 ">
+                                            <%= link_to  'Edit' , edit_task_path(task.id), class: "card-menu-link"  %>
+                                        </li>
+                                        <li><%= link_to  'Delete' , task_path(task.id), method: :delete , data: { confirm: 'Are you sure to delete this task'}, class: "card-menu-link" %></li>  
+                                    </ul> 
+                                </div>
+                            </div>
+                        </div> 
+                    <% end %>
+                </div> 
+            <% else %>
+                <p class="text-center font-weight-bold"> You have not add a task yet </p>
+                <div class="d-block text-center">
+                     <p><%= link_to "Create your first Task", new_task_path, class: "btn btn-primary text-white" %></p>
+                </div>
+            <% end %>
+                
+            
+        </div>
+        
+        </div>
+    </div>
+</div>
+
+

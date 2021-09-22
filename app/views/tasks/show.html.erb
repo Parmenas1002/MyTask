@@ -1,0 +1,20 @@
+<h3 class= "mb-4 text-center mt-4"> Your Task : <%= @task.title %></h3>
+
+<div class="container-fluid mt-2">
+    <div class="row justify-content-center align-content-center pt-5">
+        <div class= "col-md-4 ">
+            <div class="card bg-light mb-3" style="max-width: 100rem;">
+                <div class="card-header font-weight-bold text-center"><%= @task.title %></div>
+                <div class="card-body">
+                    <p class="card-text text-justify"><%= @task.description %> </p>
+                    
+                </div>
+            </div>
+        </div> 
+    </div>
+</div> 
+
+<div class="d-block text-center">
+    <p><%= link_to "Back", tasks_path, class: "btn btn-primary text-white" %></p>
+</div>
+

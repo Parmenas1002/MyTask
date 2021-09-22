@@ -10,6 +10,37 @@
   </head>
 
   <body>
+    <nav class="navbar navbar-expand-lg navbar-primary bg-primary">
+        <%= link_to "MyTask", tasks_path, class: "navbar-brand font-weight-bold text-white" %>
+       
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+              <%= link_to "Home", tasks_path, class: "nav-link text-white" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "New Task", new_task_path, class: "nav-link text-white" %>
+            </li>
+            
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search">
+            <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+    </nav>
+    <% flash.each do |key, value| %>
+        <%= content_tag(:div, class: "alert alert-#{key} alert-dismissible fade show pt-2 pb-2", role: "alert") do %>
+          <p class="text-center font-weight-bold"><%= value %> </p>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        <% end %>  
+    <% end %>
     <%= yield %>
   </body>
 </html>
