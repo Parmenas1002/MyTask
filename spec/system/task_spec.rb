@@ -16,21 +16,34 @@ RSpec.describe 'Task Test Management Function', type: :system do
     end
     describe 'List of Task' do
         context 'When we are going to task list' do
-        it 'All tasks is listed on the page' do
-            task = FactoryBot.create(:task, title: 'task')
-            visit tasks_path
-            expect(page).to have_content 'task'
-        end
+            it 'All tasks is listed on the page' do
+                task = FactoryBot.create(:task, title: 'task')
+                visit tasks_path
+                expect(page).to have_content 'task'
+            end
         end
     end
     describe 'Task Details Page' do
         context 'When we are going to task details page ' do
-        it 'The specified task is realy present' do
-            task = FactoryBot.create(:task, title: 'task')
-            visit tasks_path
-            click_on "Details"
-            expect(page).to have_content "task"
-        end
+            it 'The specified task is realy present' do
+                task = FactoryBot.create(:task, title: 'task')
+                visit tasks_path
+                click_on "Details"
+                expect(page).to have_content "task"
+            end
         end
     end
+    describe 'Ordering Task List' do
+        context 'When tasks are arranged in descending order of creation date and time' do
+          it 'New task is displayed at the top' do
+            FactoryBot.create(:task, title: 'task1')
+            FactoryBot.create(:task, title: 'task2')
+            FactoryBot.create(:task, title: 'task3')
+            visit tasks_path
+            task_list = all('.task_row')
+            expect(task_list[0].text).to eq "task3"
+          end
+        end
+    end
+    
 end
