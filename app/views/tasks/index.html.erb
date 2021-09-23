@@ -1,4 +1,29 @@
 <h3 class= "mb-4 text-center mt-4"> Your Task List</h3>
+<div class="d-block text-center">
+    <p><%= link_to "Sort by end deadline", tasks_path(sort_expired: "true"), class: "btn btn-primary text-white" %>
+    <%= link_to "Sort by creation date", tasks_path, class: "btn btn-primary text-white" %></p>
+</div>
+
+<div class="container-fluid">
+    <div class="row justify-content-center align-content-center pt-5">
+        <div class="col-md-11">
+            <%= form_with(scope: :task,local: true, url: tasks_path(search: "true"), method: :get) do |f| %>
+                <div class="d-flex">
+                 <div class="col-md-3 d-flex">
+                    <%= f.label :title, "Title ", class: "pr-3 pt-2" %>
+                    <%= f.text_field :title, class:"form-control" %>
+                 </div> 
+                 <div class="col-md-2 d-flex">
+                    <%= f.label :status, "Status ", class: "pr-3 pt-2" %>
+                    <%= f.select :status, options_for_select([['', nil],['Unstarted',0], ['In Progress', 1], ['Completed',2]]), class: "form-control" %>
+                 </div>   
+                    <%=f.submit "Search",  class: "btn btn-primary font-weight-bold text-center pl-3 pr-3 pt-1 pb-1"%>
+                </div>   
+            <%end%>
+        </div>
+    </div>
+    
+</div>
 
 <div class="container-fluid mt-2">
     <div class="row justify-content-center align-content-center pt-5">
@@ -26,13 +51,11 @@
                     <% end %>
                 </div> 
             <% else %>
-                <p class="text-center font-weight-bold"> You have not add a task yet </p>
+                <p class="text-center font-weight-bold"> Nothing to show yet</p>
                 <div class="d-block text-center">
-                     <p><%= link_to "Create your first Task", new_task_path, class: "btn btn-primary text-white" %></p>
+                     <p><%= link_to "Create Task", new_task_path, class: "btn btn-primary text-white" %></p>
                 </div>
-            <% end %>
-                
-            
+            <% end %>           
         </div>
         
         </div>

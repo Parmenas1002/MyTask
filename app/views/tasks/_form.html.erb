@@ -12,6 +12,14 @@
                         <label for="description" >Description</label>
                         <%= form.text_area :description, class: "form-control", id: "description ", rows: 5 %>
                     </div>
+                     <div class= "form-group">
+                        <label for="expiredDate" >Expired At : </label>
+                        <%= form.datetime_select :expiredDate, class: "form-control", id: "expiredDate " %>
+                    </div>
+                    <div class= "form-group">
+                        <label for="status">Status : </label>
+                        <%= form.select :status, options_for_select([['Unstarted',0], ['In Progress', 1], ['Completed',2]], selected: @task.status || nil ), class: "form-control", id:"status" %>
+                    </div>
 
                     <% if @task.errors.any? %>
                         <div class="alert alert-danger alert-dismissible fade show pt-2 pb-2 text-center">

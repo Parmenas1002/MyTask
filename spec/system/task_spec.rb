@@ -45,5 +45,19 @@ RSpec.describe 'Task Test Management Function', type: :system do
           end
         end
     end
+
+    describe 'Sort Task List by deadline' do
+        context 'When tasks are arranged in descending order of deadline date and time' do
+          it 'Task with high dealine is displayed at the top' do
+            task1 = FactoryBot.create(:task, title: 'task1', expiredDate: DateTime.parse("2021-09-23 12:30:14"))           
+            task2 = FactoryBot.create(:task, title: 'task2', expiredDate: DateTime.parse("2021-09-23 11:30:14"))           
+            task3= FactoryBot.create(:task, title: 'task3', expiredDate: DateTime.parse("2021-09-23 10:30:14"))
+            visit tasks_path
+            click_on "Sort by end deadline"
+            task_list = all('.task_row')
+            expect(task_list[0].text).to eq "task1"
+          end
+        end
+    end
     
 end
