@@ -18,7 +18,12 @@
                     </div>
                     <div class= "form-group">
                         <label for="status">Status : </label>
-                        <%= form.select :status, options_for_select([['Unstarted',0], ['In Progress', 1], ['Completed',2]], selected: @task.status || nil ), class: "form-control", id:"status" %>
+                        <%= form.select :status, Task.statuses.map{|key, value| [key,key] }, class: "form-control", id:"status" %>
+                    </div>
+
+                    <div class= "form-group">
+                        <label for="status">Priority : </label>
+                        <%= form.select :priority, Task.priorities.map{|key, value| [key,key] }, class:"form-control" %>
                     </div>
 
                     <% if @task.errors.any? %>
@@ -42,4 +47,8 @@
             </div>   
         </div>
     </div>
+</div>
+
+<div class="d-block text-center">
+    <p><%= link_to "Back", tasks_path, class: "btn btn-primary text-white" %></p>
 </div>

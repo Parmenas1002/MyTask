@@ -1,65 +1,106 @@
-<h3 class= "mb-4 text-center mt-4"> Your Task List</h3>
-<div class="d-block text-center">
-    <p><%= link_to "Sort by end deadline", tasks_path(sort_expired: "true"), class: "btn btn-primary text-white" %>
-    <%= link_to "Sort by creation date", tasks_path, class: "btn btn-primary text-white" %></p>
+<div class="container-fluid pt-5 pb-2" id='intro'>
+    <div class="row justify-content-center align-content-center text-center">
+        <div class="col-md-5">
+            <h1>What about My Task</h1>
+            <p class="mt-4 mb-4">My Task is the best application that helps you quickly plan your different tasks. Its use is very simple and you register your stains after a few seconds. Sorting functions are also available to give you a clearer idea of ​​your spots. With our solution you are sure to organize yourself better.</p>                        
+        </div>
+    </div>
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid bg-light">
+    <div class="row justify-content-center align-content-center text-center">
+        <div class="col-md-5">
+            <h3 class= "mb-4 text-center mt-4"> Your Task List</h3>
+            <p class="mt-4 mb-4">We offer best way to explore your task. So you can sort tasks by Deadline, by creation date or Priority</p>                        
+            <div class="d-block text-center pb-3">
+                <p><%= link_to "Sort by end deadline", tasks_path(sort_expired: "true"), class: "btn btn-primary text-white", id: "deadline" %>
+                <%= link_to "Sort by creation date", tasks_path, class: "btn btn-primary text-white" %>
+                <%= link_to "Sort by Priority", tasks_path(sort_priority: "true"), class: "btn btn-primary text-white", id:"priority" %>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
     <div class="row justify-content-center align-content-center pt-5">
-        <div class="col-md-11">
+        <div class="col-md-12 text-center">
             <%= form_with(scope: :task,local: true, url: tasks_path(search: "true"), method: :get) do |f| %>
                 <div class="d-flex">
-                 <div class="col-md-3 d-flex">
-                    <%= f.label :title, "Title ", class: "pr-3 pt-2" %>
-                    <%= f.text_field :title, class:"form-control" %>
+                 <div class="col-md-7 d-flex">
+                    <%= f.label :title, "Title", class: "pr-3 pt-2" %>
+                    <%= f.text_field :title, class:"form-control", placeholder: "Search now ...." %>
                  </div> 
-                 <div class="col-md-2 d-flex">
+                 <div class="col-md-3 d-flex">
                     <%= f.label :status, "Status ", class: "pr-3 pt-2" %>
-                    <%= f.select :status, options_for_select([['', nil],['Unstarted',0], ['In Progress', 1], ['Completed',2]]), class: "form-control" %>
+                    <%= f.select :status, options_for_select([['', nil],['Unstarted',0], ['In Progress', 1], ['Completed',2]]), class: "form-control pr-3" %>
                  </div>   
-                    <%=f.submit "Search",  class: "btn btn-primary font-weight-bold text-center pl-3 pr-3 pt-1 pb-1"%>
+                    <%=f.submit "Search",  class: "btn btn-primary font-weight-bold text-center pl-3 pr-3", id: "Sbtn"%>
                 </div>   
             <%end%>
         </div>
+    </div>   
+</div>
+<div class="d-block pl-3 mt-3">
+    <p><%= link_to "New Task", new_task_path, class: "btn btn-primary new_btn text-white" %></p>
+</div>
+<div class="container-fluid mt-2 mb-3">
+    <div class="row justify-content-center align-content-center">
+        <div class="col-md-12">
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Deadline</th>
+                    <th scope="col">Registered Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Priority</th>
+                    
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if @tasks.count > 0%>
+                        <% @tasks.each do |task| %>
+                            <tr>
+                                <th scope="row" class="task_row"><%=task.title%></th>
+                                <td><%=task.description%></td>
+                                <td><%=task.expiredDate%></td>
+                                <td><%=task.created_at%></td>
+                                <td><%=task.status%></td>
+                                <td><%=task.priority%></td>
+                                <td><%= link_to 'Show' , task_path(task.id), class: "show-link"  %></td>
+                                <td><%= link_to 'Edit' , edit_task_path(task.id), class: "edit-link"  %></td>
+                                <td><%= link_to 'Delete' , task_path(task.id), method: :delete , data: { confirm: 'Are you sure to delete this task'}, class:"delete-link" %></td>
+                            </tr>
+                        <%end%>       
+                    <%end%>   
+                </tbody>
+            </table>
+            <% if @tasks.count == 0 %>                   
+                <p class="text-center font-weight-bold"> Nothing to show yet.</p>
+                <p class="text-center"> If you don't have any task, please create your first task</p>
+                <div class="d-block text-center">
+                    <p><%= link_to "Create First Task", new_task_path, class: "btn btn-primary text-white" %></p>
+                </div>
+            <%end%>  
+                                   
+        </div>
     </div>
-    
+</div>
+<div class="container-fluid">
+    <div class="row justify-content-right align-content-center pt-5">
+        <div class="col-md-3 text-center">
+            <%= paginate @tasks, class: "text-center"%> 
+        </div>
+    </div>
 </div>
 
-<div class="container-fluid mt-2">
-    <div class="row justify-content-center align-content-center pt-5">
-        <div class="col-md-8">
-            <% if @tasks.count > 0 %>
-                <div class="row justify-content-center align-content-center">
-                    <% @tasks.each do |task| %>
-                        <div class= "col-md-4 align-items-stretch" >
-                            <div class="card bg-light mb-3" style="max-width: 100rem;">
-                                <div class="card-header font-weight-bold text-center task_row"><%=task.title%></div>
-                                <div class="card-body">
-                                    <p class="card-text text-justify"><%= task.description %> </p>
-                                    <ul class="nav justify-content-end ">
-                                        <li class="nav-item pr-3 ">
-                                            <%= link_to  'Details' , task_path(task.id), class: "card-menu-link"   %>
-                                        </li>
-                                        <li class="nav-item pr-3 ">
-                                            <%= link_to  'Edit' , edit_task_path(task.id), class: "card-menu-link"  %>
-                                        </li>
-                                        <li><%= link_to  'Delete' , task_path(task.id), method: :delete , data: { confirm: 'Are you sure to delete this task'}, class: "card-menu-link" %></li>  
-                                    </ul> 
-                                </div>
-                            </div>
-                        </div> 
-                    <% end %>
-                </div> 
-            <% else %>
-                <p class="text-center font-weight-bold"> Nothing to show yet</p>
-                <div class="d-block text-center">
-                     <p><%= link_to "Create Task", new_task_path, class: "btn btn-primary text-white" %></p>
-                </div>
-            <% end %>           
-        </div>
-        
-        </div>
-    </div>
-</div>
+                      
+
+
+
+
 
 

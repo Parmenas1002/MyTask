@@ -8,15 +8,8 @@
                 <div class="card-body">
                     <p class="card-text text-justify"><%= @task.description %> </p>
                     <p class="card-text text-justify">Expired at : <%= @task.expiredDate %> </p>
-                    <p class="card-text text-justify">Status: 
-                        <% if @task.status == 0 %>
-                        Unstarted
-                        <%elsif @task.status ==1 %>
-                        In Progress
-                        <%else%>
-                        Completed
-                        <%end%>
-                    </p>
+                    <p class="card-text text-justify">Status: <%= @task.status %></p>
+                    <p class="card-text text-justify">Priority : <%= @task.priority %> </p>
                 </div>
             </div>
         </div> 

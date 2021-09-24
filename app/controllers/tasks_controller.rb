@@ -2,19 +2,21 @@ class TasksController < ApplicationController
     before_action :set_task, only: [:show, :edit,:update,:destroy]
     def index
         if params[:sort_expired]
-            @tasks = Task.all.order(expiredDate: :desc)
-        elsif params[:task]
+            @tasks = Task.order_by_deadline.page params[:page]
+        elsif params[:task].present?
             if (params[:task][:title]!= "" && params[:task][:status]== "")
-                @tasks = Task.where("title LIKE ?", "%#{params[:task][:title]}%")
+                @tasks = Task.search_with_title(params[:task][:title]).page params[:page]
             elsif ((params[:task][:title]== "" && params[:task][:status]!= ""))
-                @tasks = Task.where(status: params[:task][:status])
+                @tasks = Task.order_by_status(params[:task][:status]).page params[:page]
             elsif ((params[:task][:title]!= "" && params[:task][:status]!= ""))
-                @tasks = Task.where("title LIKE ? AND status= ?", "%#{params[:task][:title]}%", params[:task][:status].to_i)
+                @tasks = Task.search_with_title(params[:task][:title]).order_by_status(params[:task][:status]).page params[:page]
             else
-                @tasks = Task.all.order(created_at: :desc)
+                @tasks = Task.order_by_created_at.page params[:page]
             end
+        elsif params[:sort_priority]
+            @tasks = Task.order_by_priority_link.page params[:page];
         else
-            @tasks = Task.all.order(created_at: :desc)
+            @tasks = Task.order_by_created_at.page params[:page]
         end       
     end
 
@@ -48,11 +50,11 @@ class TasksController < ApplicationController
     def destroy
         @task.destroy
         redirect_to tasks_path, notice: "Task delete with success "
-      end
+    end
     
     private 
     def task_params
-        params.require(:task).permit(:title,:description, :expiredDate, :status)
+        params.require(:task).permit(:title,:description, :expiredDate, :status, :priority)
     end
     def set_task
         @task = Task.find(params[:id])
