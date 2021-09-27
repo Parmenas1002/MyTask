@@ -1,3 +1,68 @@
 .alert-notice{
     color:#155724;background-color:#d4edda;border-color:#c3e6cb
 }
+
+*{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+#top-link{
+    padding-top: 10px;
+}
+
+.home_link{
+    color: black;
+    font-size: 1.2rem;  
+}
+.home_link:hover{
+    text-decoration: none;
+    color: #01da9d;
+}
+
+#intro h1, #title{
+    color: #01da9d;
+}
+
+.edit-link{
+    color: black;
+    border:1px solid #007BFF;
+    border-radius: 5px;
+    padding: 3px 16px 3px 16px;
+}
+
+.edit-link:hover{
+    text-decoration: none;
+    color: #007BFF;
+}
+
+.show-link{
+    color: black;
+    border:1px solid #01da9d;
+    border-radius: 5px;
+    padding: 3px 16px 3px 16px;
+}
+
+.show-link:hover{
+    text-decoration: none;
+    color: #01da9d;
+}
+
+.delete-link{
+    color: black;
+    border:1px solid red;
+    border-radius: 5px;
+    padding: 3px 16px 3px 16px;
+}
+
+.delete-link:hover{
+    text-decoration: none;
+    color: red;
+}
+
+.new_btn{
+    background-color: #01da9d !important;
+    border: #01da9d;
+}
+
+.new_btn:hover{
+    opacity: 0.7;
+}

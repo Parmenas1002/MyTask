@@ -7,7 +7,9 @@
                 <div class="card-header font-weight-bold text-center"><%= @task.title %></div>
                 <div class="card-body">
                     <p class="card-text text-justify"><%= @task.description %> </p>
-                    
+                    <p class="card-text text-justify">Expired at : <%= @task.expiredDate %> </p>
+                    <p class="card-text text-justify">Status: <%= @task.status %></p>
+                    <p class="card-text text-justify">Priority : <%= @task.priority %> </p>
                 </div>
             </div>
         </div> 

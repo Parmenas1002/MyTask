@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
   root  "tasks#index"
-  resources :tasks do
-    collection do
-      post :confirm
-    end
-  end
+  get "/search", to: "tasks#search", as: "search_tasks"
+  resources :tasks 
 end
