@@ -24,4 +24,6 @@ class Task < ApplicationRecord
         "In progress": 1,
         "Completed": 2
     }
+
+    belongs_to :user
 end

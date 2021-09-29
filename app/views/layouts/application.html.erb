@@ -21,12 +21,29 @@
 
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item active">
-              <%= link_to "All Task List", tasks_path, class: "home_link" %>   
+          <li class="nav-item active"> 
+              <% if logged_in? %>
+                <%= link_to "All Task List", tasks_path, class: "home_link" %> 
+                <% if current_user.admin %>
+                  <%= link_to "Admin Page", admin_users_path, class: "pl-3 home_link" %> 
+                <% end %> 
+              <% end %>
           </li>
         </ul>
-      </div>
-      
+        <% if logged_in? %>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown pr-5">
+                <%= link_to 'Profile', user_path(current_user.id) %>                 
+                  
+                <%= link_to 'Logout', session_path(current_user.id), method: :delete, class: "" %>
+                <% if current_user.admin %>
+                  Admin
+                <% end %>
+                <%= current_user.name %> 
+            </li>
+          </ul>
+        <% end %>
+      </div>  
     </nav>
     <% flash.each do |key, value| %>
         <%= content_tag(:div, class: "alert alert-#{key} alert-dismissible fade show pt-2 pb-2", role: "alert") do %>

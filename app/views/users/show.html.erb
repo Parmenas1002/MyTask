@@ -1,0 +1,22 @@
+<h3 class= "mb-4 text-center mt-4"> User Details Informations</h3>
+
+<div class="container-fluid mt-2">
+    <div class="row justify-content-center align-content-center">
+        <div class= "col-md-4 ">
+            <div class="card bg-light mb-3" style="max-width: 100rem;">
+                <div class="card-header font-weight-bold text-center"><%= @user.name %></div>
+                <div class="card-body">
+                    <p class="card-text text-justify">Name : <%= @user.name %> </p>
+                    <p class="card-text text-justify">Email : <%= @user.email %></p>
+                    <p class="card-text text-justify">Rule : <%= @user.admin ? "Admin" : "General User" %></p>
+                    <p class="card-text text-justify">Task Number : <%= @user.tasks.count %> </p>
+                </div>
+            </div>
+        </div> 
+    </div>
+</div> 
+
+<div class="d-block text-center">
+    <p><%= link_to "Back", tasks_path, class: "btn btn-primary text-white" %></p>
+</div>
+

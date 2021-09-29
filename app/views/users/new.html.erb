@@ -1,0 +1,50 @@
+<% if @user.errors.any? %>
+    <div class="alert alert-danger alert-dismissible fade show pt-2 pb-2 text-center">
+        <% @user.errors.full_messages.each do |msg| %>
+            <p><%= msg %></p>
+        <% end %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<% end %>
+<div class="container">
+    <div class="row justify-content-center align-content-center pt-5">
+        <div class= "col-lg-5 col-md-8 col-sm-12 col-xl-4">
+            <div class="card p-3 mb-3 bg-white" >
+                <div class="card-header pl-4 pb-0 text-center" style="border: none; background-color:white;">
+                    <%= image_tag "myTask.png", height: 80, width: 80 %>   
+                    <p class="mt-2 font-weight-bold semi-info">Sign up to see your tasks</p>       
+                </div>
+                <div class="card-body">
+                    <%= form_with(model: @user, local: true) do |form| %>
+                        <div class="form-group">
+                            <%= form.text_field :email, class: "form-control bg-light small", required: true, placeholder: "Email address" %>
+                        </div>
+                        <div class="form-group">
+                            <%= form.text_field :name, class: "form-control bg-light", required: true, placeholder: "Name" %>
+                        </div>
+                        
+                        <div class="form-group">
+                            <%= form.password_field :password, class: "form-control bg-light", required: true, placeholder: "Password" %>
+                        </div>
+                        <div class="form-group">
+                            <%= form.password_field :password_confirmation, class: "form-control bg-light", required: true, placeholder: "Confirm password" %>
+                        </div>
+                        <div class="row justify-content-center mb-3 mt-4">
+                            <div class="col-md-12 text-center">
+                                <%= form.submit "Create Account", class:"btn btn-primary font-weight-bold pl-5 pr-5" %>
+                            </div>
+                        </div>
+                        <p class="semi-info small text-center m-0 ">By registering, you agree to our <span class="font-weight-bold">Terms and Conditions</span> , our <span class="font-weight-bold">Data Policy</span> and our <span class="font-weight-bold">Cookie Policy.</span></p>                         
+                    <% end %>
+                </div>  
+            </div>
+            <div class="card bg-white" >
+                <div class="card-body  pb-4 pt-4">
+                    <p class="small text-center m-0 ">Do you have an account ? <%= link_to 'Sign in', new_session_path, class:"" %></p> 
+                </div>      
+            </div>
+        </div> 
+    </div>
+</div>

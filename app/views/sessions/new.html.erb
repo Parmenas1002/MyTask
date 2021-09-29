@@ -1,0 +1,31 @@
+<div class="container mt-5">
+    <div class="row justify-content-center align-content-center pt-5 mt-5 ">
+        <div class= "col-lg-5 col-md-8 col-sm-12 col-xl-4">
+            <div class="card p-3 mb-3 bg-white" >
+                <div class="card-header pl-4 pb-0 text-center mb-4" style="border: none; background-color:white;">
+                    <%= image_tag "myTask.png", height: 80, width: 80 %>         
+                </div>
+                <div class="card-body">
+                    <%= form_with(scope: :session, url: sessions_path, local: true) do |form| %>
+                        <div class="form-group">
+                            <%= form.email_field :email, class: "form-control bg-light", required: true, placeholder: "Email"  %>
+                        </div>
+                        <div class="form-group">
+                            <%= form.password_field :password,  class: "form-control bg-light", required: true, placeholder: "Password" %>
+                        </div>
+                        <div class="row justify-content-center mt-4">
+                            <div class="col-md-12 text-center">
+                                <%= form.submit "Login", class:"btn btn-primary font-weight-bold pl-5 pr-5" %>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>  
+            </div>
+            <div class="card bg-white" >
+                <div class="card-body pb-4 pt-4">
+                    <p class="small text-center m-0 ">You don't have an account ? <%= link_to 'Sign up', new_user_path, class:"" %></p> 
+                </div>      
+            </div>
+        </div> 
+    </div>
+</div>
