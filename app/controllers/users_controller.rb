@@ -2,7 +2,11 @@ class UsersController < ApplicationController
   skip_before_action :login_required
   before_action :set_user, only: [:show]
   def new
-    @user = User.new
+    if session[:user_id].present?
+      redirect_to tasks_path, notice: "Please stay on tasks page"
+    else
+      @user = User.new
+    end
   end
 
   def create

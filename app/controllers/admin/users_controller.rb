@@ -28,7 +28,11 @@ class Admin::UsersController < ApplicationController
   end
   def destroy
     @user.destroy
-    redirect_to admin_users_path, notice: "User delete with success"
+    if @user.admin
+      redirect_to admin_users_path, notice: "You can't delete the last admin"
+    else
+      redirect_to admin_users_path, notice: "User delete with success"
+    end  
   end
   private
   def user_params

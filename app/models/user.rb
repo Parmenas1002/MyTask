@@ -1,6 +1,7 @@
 class User < ApplicationRecord 
     before_update :destroy_admin
     before_create :destroy_admin
+    before_destroy :check_admin
     validates :name, presence:true, length: {minimum:3, maximum:30}
     validates :email, presence:true, length: { maximum:255 }, 
                 format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i},
@@ -13,6 +14,12 @@ class User < ApplicationRecord
     def destroy_admin
         if self.admin 
             User.update_all(admin: 0)
+        end
+    end
+
+    def check_admin
+        if self.admin 
+            throw(:abort)
         end
     end
     
