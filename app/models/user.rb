@@ -10,9 +10,5 @@ class User < ApplicationRecord
     has_many :tasks, dependent: :destroy
 
     private
-    def destroy_admin
-        if self.admin 
-            User.update_all(admin: 0)
-        end
-    end
+    
 end
