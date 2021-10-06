@@ -2,21 +2,21 @@ class TasksController < ApplicationController
     before_action :set_task, only: [:show, :edit,:update,:destroy]
     def index
         if params[:sort_expired]
-            @tasks = Task.order_by_deadline.page params[:page]
+            @tasks = current_user.tasks.order_by_deadline.page params[:page]
         elsif params[:task].present?
             if (params[:task][:title]!= "" && params[:task][:status]== "")
-                @tasks = Task.search_with_title(params[:task][:title]).page params[:page]
+                @tasks = current_user.tasks.search_with_title(params[:task][:title]).page params[:page]
             elsif ((params[:task][:title]== "" && params[:task][:status]!= ""))
-                @tasks = Task.order_by_status(params[:task][:status]).page params[:page]
+                @tasks = current_user.tasks.order_by_status(params[:task][:status]).page params[:page]
             elsif ((params[:task][:title]!= "" && params[:task][:status]!= ""))
-                @tasks = Task.search_with_title(params[:task][:title]).order_by_status(params[:task][:status]).page params[:page]
+                @tasks = current_user.tasks.search_with_title(params[:task][:title]).order_by_status(params[:task][:status]).page params[:page]
             else
-                @tasks = Task.order_by_created_at.page params[:page]
+                @tasks = current_user.tasks.order_by_created_at.page params[:page]
             end
         elsif params[:sort_priority]
-            @tasks = Task.order_by_priority_link.page params[:page];
+            @tasks = current_user.tasks.order_by_priority_link.page params[:page];
         else
-            @tasks = Task.order_by_created_at.page params[:page]
+            @tasks = current_user.tasks.order_by_created_at.page params[:page]
         end       
     end
 
@@ -25,9 +25,9 @@ class TasksController < ApplicationController
     end
 
     def create
-        @task = Task.new(task_params)
+        @task = current_user.tasks.build(task_params)
         if @task.save
-            redirect_to task_path(@task.id), notice: "New Task created with success"
+            redirect_to task_path(@task.id), notice: "You add new Task with success"
         else
             render :new
         end
@@ -38,7 +38,7 @@ class TasksController < ApplicationController
 
     def update
         if @task.update(task_params)
-          redirect_to task_path(@task.id), notice: "Task update with success"
+          redirect_to task_path(@task.id), notice: "You update Task with success"
         else
           render :edit
         end
@@ -49,7 +49,7 @@ class TasksController < ApplicationController
 
     def destroy
         @task.destroy
-        redirect_to tasks_path, notice: "Task delete with success "
+        redirect_to tasks_path, notice: "You delete Task with success "
     end
     
     private 
