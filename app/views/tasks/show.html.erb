@@ -10,6 +10,11 @@
                     <p class="card-text text-justify">Expired at : <%= @task.expiredDate %> </p>
                     <p class="card-text text-justify">Status: <%= @task.status %></p>
                     <p class="card-text text-justify">Priority : <%= @task.priority %> </p>
+                    <div>
+                        <% @task.tags.each do |tag| %>
+                            <span class="badge badge-pill badge-primary"><%= tag.name %></span>
+                        <% end %>
+                    </div>
                 </div>
             </div>
         </div> 

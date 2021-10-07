@@ -3,6 +3,7 @@
         <div class="col-md-5">
             <h1>Admin Interface</h1>
             <p class="mt-4 mb-4"> Manage all users here. With this page you can have a global view of your application users. You can delete, edit user profile like you want</p>                        
+            <p><%= link_to "See your tags Here", admin_tags_path, class: "btn btn-primary text-white" %></p>
         </div>
     </div>
 </div>
@@ -42,9 +43,9 @@
             </table>
             <% if @users.count == 0 %>                   
                 <p class="text-center font-weight-bold"> Nothing to show yet.</p>
-                <p class="text-center"> If you don't have any task, please create your first task</p>
+                <p class="text-center"> If you don't have any user, please create your first task</p>
                 <div class="d-block text-center">
-                    <p><%= link_to "Create First Task", new_task_path, class: "btn btn-primary text-white" %></p>
+                    <p><%= link_to "Create First Task", new_admin_user_path, class: "btn btn-primary text-white" %></p>
                 </div>
             <%end%>  
                                    

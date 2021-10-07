@@ -1,0 +1,45 @@
+<div class="container-fluid pt-5 pb-2" id='intro'>
+    <div class="row justify-content-center align-content-center text-center">
+        <div class="col-md-5">
+            <h1>Admin Interface</h1>
+            <p class="mt-4 mb-4"> Here you manage all tags of Tasks. You can add, edit and delete them.</p>  
+            <p><%= link_to "Go back to user page", admin_users_path, class: "btn btn-primary text-white" %></p>                      
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid mt-2 mb-3">
+    <div class="row justify-content-center align-content-center">
+        <div class="col-md-5">
+            <p><%= link_to "New Tag", new_admin_tag_path, class: "btn btn-primary new_btn text-white" %></p>
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                    <th scope="col">Name</th>                  
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if @tags.count > 0%>
+                        <% @tags.each do |tag| %>
+                            <tr>
+                                <th scope="row" class="task_row"><%=tag.name %></th>
+                                <td><%= link_to 'Edit' , edit_admin_tag_path(tag.id), class: "edit-link"  %></td>
+                                <td><%= link_to 'Delete' ,admin_tag_path(tag.id), method: :delete , data: { confirm: 'Are you sure to delete this tag'}, class:"delete-link" %></td>
+                            </tr>
+                        <%end%>       
+                    <%end%>   
+                </tbody>
+            </table>
+            <% if @tags.count == 0 %>                   
+                <p class="text-center font-weight-bold"> Nothing to show yet.</p>
+                <p class="text-center"> If you don't have any tag, please create your first tag</p>
+                <div class="d-block text-center">
+                    <p><%= link_to "Create First Task", new_admin_tag_path, class: "btn btn-primary text-white" %></p>
+                </div>
+            <%end%>  
+                                   
+        </div>
+    </div>
+</div>
+

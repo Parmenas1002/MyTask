@@ -10,6 +10,9 @@ class TasksController < ApplicationController
                 @tasks = current_user.tasks.order_by_status(params[:task][:status]).page params[:page]
             elsif ((params[:task][:title]!= "" && params[:task][:status]!= ""))
                 @tasks = current_user.tasks.search_with_title(params[:task][:title]).order_by_status(params[:task][:status]).page params[:page]
+            elsif ((params[:task][:title]== "" && params[:task][:status]== "" && params[:task][:tag_id]!= ""))
+                tag = Tag.find(params[:task][:tag_id].to_i)
+                @tasks = tag.tasks.where(user_id: current_user.id).page params[:page]
             else
                 @tasks = current_user.tasks.order_by_created_at.page params[:page]
             end
@@ -54,7 +57,7 @@ class TasksController < ApplicationController
     
     private 
     def task_params
-        params.require(:task).permit(:title,:description, :expiredDate, :status, :priority)
+        params.require(:task).permit(:title,:description, :expiredDate, :status, :priority, tag_ids: [])
     end
     def set_task
         @task = Task.find(params[:id])
