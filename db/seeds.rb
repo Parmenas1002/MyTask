@@ -1,13 +1,18 @@
 10.times do |n|
-    name = Faker::Games::Pokemon.name
-    email = Faker::Internet.email
+    name = "User number " + n.to_s
+    email = "user" + n.to_s + "@gmail.com"
     password = "mypassword"
     User.create!(name: name,
                 email: email,
-                password: password,)
+                password: password)
 end
 
 10.times do |n|
-    name = Faker::Games::Pokemon.name
-    Tag.create!(name: name)
+    title = "My task " + n.to_s
+    description = "Description of Task number " + n.to_s
+    Task.create!(title: title,
+                 description: description,
+                 status: 0,
+                 priority: 0,
+                 user: User.first)
 end
