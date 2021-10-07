@@ -6,7 +6,7 @@
                     <%= image_tag "myTask.png", height: 80, width: 80 %>         
                 </div>
                 <div class="card-body">
-                    <%= form_with(model: @tag, local: true, url: admin_tag_path) do |form| %>
+                    <%= form_with(model: @tag, local: true, url: choose_new_or_edit) do |form| %>
                         <div class="form-group">
                             <%= form.text_field :name, class: "form-control bg-light small", required: true, placeholder: "Tag name" %>
                         </div>
